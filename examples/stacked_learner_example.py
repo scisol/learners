@@ -4,6 +4,7 @@ Show example of stacked learner.
 
 import cPickle as pickle
 import numpy as np
+import matplotlib.pyplot as plt
 from learn.learners import StackedLearner
 
 
@@ -23,7 +24,12 @@ train_labels = test_labels
 test_labels = temp
 print "Shapes: ", train_feats.shape, train_labels.shape, test_feats.shape, test_labels.shape
 
+print np.nonzero(test_labels == 0)[0].shape, np.nonzero(test_labels == 1)[0].shape
+
 param_dict = {"C": [10, 100, 1000]}
+label_dict = {"none": 0, "corner": 1}
 sl = StackedLearner(stacked_learner="linear_svm", param_dict=param_dict)
 sl.fit_from_arrays(train_feats, train_labels)
-sl.evaluate(test_feats, test_labels)
+sl.evaluate(test_feats, test_labels, op_point=0.15, label_dict=label_dict)
+
+plt.show()

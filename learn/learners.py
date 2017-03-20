@@ -125,6 +125,8 @@ class StackedLearner(object):
                 label_name = get_label(label_dict, classes[j])
                 plt.plot(fpr, tpr, label=label_name, c=plot_colors[j], linewidth=3.0)
                 plt.xlim([0, op_point])
+                plt.xlabel('FPR')
+                plt.ylabel('TDR')
                 aucs.append(metrics.auc(fpr, tpr).mean())
             print "AUCs: " + str(aucs)
             plt.legend()
